@@ -1,0 +1,472 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  mode: advanced-chat
+  name: MR Sai
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:0.1.0@539dc0dde8ecaa84e61b8eeb154c3bb7fbc9caa80afd83763dd5860a725d2742
+kind: app
+version: 0.3.1
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        image_file_size_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: Hey there, I'm here to help you build your custom PC
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: true
+    suggested_questions:
+    - 'what software do i need for graphic design '
+    - Can you let me know what types of components i will need to build my PC
+    suggested_questions_after_answer:
+      enabled: true
+    text_to_speech:
+      enabled: true
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: question-classifier
+      id: 1753297361838-source-1753297594695-target
+      source: '1753297361838'
+      sourceHandle: source
+      target: '1753297594695'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1753297594695-1-1753345044530-target
+      source: '1753297594695'
+      sourceHandle: '1'
+      target: '1753345044530'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: knowledge-retrieval
+      id: 1753297594695-2-17533450856660-target
+      source: '1753297594695'
+      sourceHandle: '2'
+      target: '17533450856660'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: question-classifier
+        targetType: answer
+      id: 1753297594695-1753344993430-1753349002411-target
+      source: '1753297594695'
+      sourceHandle: '1753344993430'
+      target: '1753349002411'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 1753345044530-source-1753349080428-target
+      source: '1753345044530'
+      sourceHandle: source
+      target: '1753349080428'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: knowledge-retrieval
+        targetType: llm
+      id: 17533450856660-source-1753349093900-target
+      source: '17533450856660'
+      sourceHandle: source
+      target: '1753349093900'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1753349080428-source-1753349362233-target
+      source: '1753349080428'
+      sourceHandle: source
+      target: '1753349362233'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: 1753349093900-source-1753349396009-target
+      source: '1753349093900'
+      sourceHandle: source
+      target: '1753349396009'
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        desc: ''
+        selected: false
+        title: Start
+        type: start
+        variables: []
+      height: 53
+      id: '1753297361838'
+      position:
+        x: 69
+        y: 282
+      positionAbsolute:
+        x: 69
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        classes:
+        - id: '1'
+          name: Question about PC hardware
+        - id: '2'
+          name: Question about PC Software
+        - id: '1753344993430'
+          name: 'Non PC related questions '
+        desc: ''
+        instructions: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        query_variable_selector:
+        - '1753297361838'
+        - sys.query
+        selected: false
+        title: Question Classifier
+        topics: []
+        type: question-classifier
+        vision:
+          enabled: false
+      height: 209
+      id: '1753297594695'
+      position:
+        x: 407
+        y: 236.8875201520707
+      positionAbsolute:
+        x: 407
+        y: 236.8875201520707
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - g3+snna6OKFmpIO7y/IYyyJ1jlAq24flktloz1ND5O4IM91UVfBpweiC/Lz9s6MF
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 1
+        query_variable_selector:
+        - '1753297361838'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: Knowledge Retrieval
+        type: knowledge-retrieval
+      height: 91
+      id: '1753345044530'
+      position:
+        x: 711
+        y: 236.8875201520707
+      positionAbsolute:
+        x: 711
+        y: 236.8875201520707
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        dataset_ids:
+        - hEUBzhopfURwX8ubxWVgX0hes4+VvL7g3wfbYWwXV4DB//LERFxWJeDszikdFWeB
+        desc: ''
+        multiple_retrieval_config:
+          reranking_enable: true
+          reranking_mode: weighted_score
+          top_k: 4
+          weights:
+            keyword_setting:
+              keyword_weight: 0
+            vector_setting:
+              embedding_model_name: text-embedding-3-large
+              embedding_provider_name: langgenius/openai/openai
+              vector_weight: 1
+        query_variable_selector:
+        - '1753297361838'
+        - sys.query
+        retrieval_mode: multiple
+        selected: false
+        title: Knowledge Retrieval (1)
+        type: knowledge-retrieval
+      height: 91
+      id: '17533450856660'
+      position:
+        x: 715.9638992069827
+        y: 379.9237278327222
+      positionAbsolute:
+        x: 715.9638992069827
+        y: 379.9237278327222
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: Sorry I can only handle questions related to building and purchasing
+          PC
+        desc: ''
+        selected: false
+        title: Answer
+        type: answer
+        variables: []
+      height: 117
+      id: '1753349002411'
+      position:
+        x: 715.9638992069827
+        y: 509.9237278327222
+      positionAbsolute:
+        x: 715.9638992069827
+        y: 509.9237278327222
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '1753345044530'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_config:
+          jinja2_variables: []
+        prompt_template:
+        - edition_type: basic
+          id: 11b2528a-6300-4b19-8271-937c5a10d92e
+          role: system
+          text: 'Use the following context as your learned knowledge, inside <context></context>
+            XML tags.
+
+            <context>
+
+            {{#context#}}
+
+            </context>
+
+            When answer to user:
+
+            - If don''t know, just say that you don''t know
+
+            - If you don''t know when you are not sure, ask for clarification.
+
+            Avoid mentioning that you obtained the information from the context .
+
+            And answer according to the language of the user''s question.'
+        - id: 1798c011-6306-4d56-a4d3-ba8cb76bb0be
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        title: LLM
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1753349080428'
+      position:
+        x: 1015
+        y: 236.8875201520707
+      positionAbsolute:
+        x: 1015
+        y: 236.8875201520707
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        context:
+          enabled: true
+          variable_selector:
+          - '17533450856660'
+          - result
+        desc: ''
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-3.5-turbo
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: dc275bb7-7fd8-46a1-a40a-86001cd74157
+          role: system
+          text: "```xml\n<instruction>\n1. Start by identifying the computer software\
+            \ related query that needs to be answered, such as the Name, Description,\
+            \ price, and its intended use.\n2. For each query, provide a clear and\
+            \ concise response without including any XML tags in the output.\n3. Ensure\
+            \ that the information provided is accurate and relevant to the specific\
+            \ software being inquired about.\n4. Organize your responses in a structured\
+            \ manner to make it easy for the user to understand and utilize the information\
+            \ effectively.\n\n<examples>\n- Query: Name\n  Response: The name of the\
+            \ software is \"Microsoft Office\".\n  \n- Query: Description\n  Response:\
+            \ Microsoft Office is a suite of productivity applications that includes\
+            \ Word, Excel, PowerPoint, and Outlook.\n  \n- Query: Price\n  Response:\
+            \ The price of Microsoft Office varies depending on the version and subscription\
+            \ plan chosen.\n  \n- Query: Used for\n  Response: Microsoft Office is\
+            \ used for creating documents, spreadsheets, presentations, and managing\
+            \ emails.\n\n- Query: Name\n  Response: Adobe Photoshop\n  \n- Query:\
+            \ Description\n  Response: Adobe Photoshop is a powerful image editing\
+            \ software used by professionals and enthusiasts alike.\n  \n- Query:\
+            \ Price\n  Response: Adobe Photoshop offers different pricing plans for\
+            \ individuals, businesses, and students.\n  \n- Query: Used for\n  Response:\
+            \ Adobe Photoshop is primarily used for editing and enhancing digital\
+            \ images.\n\n- Query: Name\n  Response: Google Chrome\n  \n- Query: Description\n\
+            \  Response: Google Chrome is a popular web browser developed by Google.\n\
+            \  \n- Query: Price\n  Response: Google Chrome is available for free download\
+            \ and use.\n  \n- Query: Used for\n  Response: Google Chrome is used for\
+            \ browsing the internet and accessing web-based applications.\n```"
+        - id: 9a671f43-c51c-4a5f-b11c-4d2b474fcc78
+          role: user
+          text: '{{#sys.query#}}'
+        selected: false
+        title: LLM 2
+        type: llm
+        variables: []
+        vision:
+          enabled: false
+      height: 89
+      id: '1753349093900'
+      position:
+        x: 1019.9638992069827
+        y: 379.9237278327222
+      positionAbsolute:
+        x: 1019.9638992069827
+        y: 379.9237278327222
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1753349080428.text#}}'
+        desc: ''
+        selected: false
+        title: Answer 2
+        type: answer
+        variables: []
+      height: 104
+      id: '1753349362233'
+      position:
+        x: 1319
+        y: 236.8875201520707
+      positionAbsolute:
+        x: 1319
+        y: 236.8875201520707
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    - data:
+        answer: '{{#1753349093900.text#}}'
+        desc: ''
+        selected: false
+        title: Answer 3
+        type: answer
+        variables: []
+      height: 104
+      id: '1753349396009'
+      position:
+        x: 1323.9638992069827
+        y: 379.9237278327222
+      positionAbsolute:
+        x: 1323.9638992069827
+        y: 379.9237278327222
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 244
+    viewport:
+      x: -563.1509388614257
+      y: 85.04272387961475
+      zoom: 0.6212012067046674
